@@ -1,0 +1,25 @@
+# NeoStats — AI-Powered Investment Research Assistant
+# Python >= 3.10
+
+# LLM
+groq>=0.9.0
+
+# Web search
+tavily-python>=0.3.0
+
+# Embeddings
+sentence-transformers>=2.7.0
+
+# Document parsing
+PyPDF2>=3.0.0
+python-docx>=1.1.0
+
+# Data / DB
+pandas>=2.0.0
+numpy>=1.26.0
+
+# UI
+streamlit>=1.35.0
+
+# Utilities (no extra install needed — stdlib)
+# hashlib, pickle, sqlite3, logging, time, os, dataclasses, enum, typing
