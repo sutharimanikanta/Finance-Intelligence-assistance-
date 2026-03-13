@@ -1,5 +1,4 @@
 NeoStats — AI-Powered Investment Research Assistant
-
 An intelligent financial research assistant that combines portfolio analytics, document retrieval, and real-time market intelligence into a unified chatbot interface.
 
 Built with Streamlit, LLMs, SQL analytics, RAG pipelines, and live web search.
@@ -7,6 +6,7 @@ Built with Streamlit, LLMs, SQL analytics, RAG pipelines, and live web search.
 The system allows users to query portfolio data, analyze financial documents, and retrieve market insights through a single conversational interface.
 
 Project Architecture
+text
 project/
 │
 ├── config/
@@ -36,10 +36,7 @@ app.py	Main Streamlit application
 .streamlit/	Streamlit UI configuration
 Key Features
 1. Reliable SQL Generation (Zero-Hallucination SQL)
-
-The LLM does not generate SQL directly.
-
-Instead:
+The LLM does not generate SQL directly. Instead:
 
 The model classifies the user query into a structured QueryIntent
 
@@ -50,7 +47,6 @@ Every column reference is validated against the live SQLite schema
 This prevents SQL hallucinations and ensures accurate analytics.
 
 2. Intelligent Query Routing
-
 A triage router determines which data sources should be used before answering a query.
 
 Query Example	Sources Used
@@ -59,7 +55,6 @@ Explain what Nvidia does	RAG / Web
 How is Nvidia affecting my portfolio?	SQL + Web
 Explain Berry Brand and show my exposure	SQL + RAG
 3. Multi-Index RAG System
-
 Uploaded documents are indexed using vector embeddings.
 
 Features:
@@ -77,49 +72,43 @@ PDF
 DOCX
 
 4. Cache-Aside Retrieval
-
 To reduce repeated LLM calls, the system uses in-memory caching.
 
 Property	Value
 Cache type	In-memory
 TTL	5 minutes
 Max entries	200
-
-Cache key format:
-
-MD5(index_name + query)
+Cache key format	MD5(index_name + query)
 5. Clarification Handling
-
 If the system detects an ambiguous query, it requests clarification.
 
 Example:
 
+text
 User: Show profit
 System: Which portfolio do you mean?
-
 A retry limit prevents infinite clarification loops.
 
 Installation
-
 Clone the repository:
 
+bash
 git clone <repo-url>
 cd project
-
 Install dependencies:
 
+bash
 pip install -r requirements.txt
-
 Set API keys:
 
+bash
 export GROQ_API_KEY="your_key"
 export TAVILY_API_KEY="your_key"
-
 Run the application:
 
+bash
 streamlit run app.py
 Streamlit Cloud Deployment
-
 Push the repository to GitHub
 
 Go to Streamlit Cloud
@@ -128,18 +117,15 @@ Create a new app
 
 Add secrets in deployment settings:
 
+text
 GROQ_API_KEY = "your_key"
 TAVILY_API_KEY = "your_key"
-
-Set the main file to:
-
-app.py
+Set the main file to: app.py
 
 Deploy the application
 
 Usage
 Step 1 — Load datasets
-
 Upload the following files:
 
 holdings.csv
@@ -149,7 +135,6 @@ trades.csv
 Click Load Datasets in the sidebar.
 
 Step 2 — Upload documents (optional)
-
 Upload financial research documents.
 
 Supported formats:
@@ -168,27 +153,12 @@ How is the Fed rate decision affecting HoldCo 1?	SQL + Web
 Show Nvidia exposure and latest news	SQL + Web
 Expected Dataset Format
 holdings.csv
-AsOfDate
-PortfolioName
-SecurityTypeName
-SecName
-Qty
-Price
-MV_Base
+text
+AsOfDate,PortfolioName,SecurityTypeName,SecName,Qty,Price,MV_Base
 trades.csv
-TradeDate
-SettleDate
-TradeTypeName
-SecurityId
-SecurityName
-Ticker
-Quantity
-Price
-PortfolioName
-TotalCash
-CustodianName
+text
+TradeDate,SettleDate,TradeTypeName,SecurityId,SecurityName,Ticker,Quantity,Price,PortfolioName,TotalCash,CustodianName
 Tech Stack
-
 Python
 
 Streamlit
