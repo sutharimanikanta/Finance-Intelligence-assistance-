@@ -4,7 +4,7 @@ An intelligent financial research assistant that combines portfolio analytics, d
 
 Built with Streamlit, LLMs, SQL analytics, RAG pipelines, and live web search.
 
-The system allows users to query portfolio data, analyze financial documents, and retrieve current market insights in a single conversational interface.
+The system allows users to query portfolio data, analyze financial documents, and retrieve market insights through a single conversational interface.
 
 Project Architecture
 project/
@@ -30,10 +30,10 @@ project/
 Folder Overview
 Folder	Description
 config/	Stores configuration variables and API keys
-models/	LLM client wrapper and embedding model
+models/	LLM wrapper and embedding model
 utils/	Core system logic (SQL engine, RAG pipeline, web search)
 app.py	Main Streamlit application
-.streamlit/	UI configuration for Streamlit deployment
+.streamlit/	Streamlit UI configuration
 Key Features
 1. Reliable SQL Generation (Zero-Hallucination SQL)
 
@@ -41,17 +41,17 @@ The LLM does not generate SQL directly.
 
 Instead:
 
-The model classifies the user query into a structured QueryIntent.
+The model classifies the user query into a structured QueryIntent
 
-SQL queries are generated deterministically using a rule-based generator.
+SQL queries are generated deterministically using a rule-based generator
 
-Every column reference is validated against the live SQLite schema.
+Every column reference is validated against the live SQLite schema
 
 This prevents SQL hallucinations and ensures accurate analytics.
 
 2. Intelligent Query Routing
 
-A triage router determines which data sources are required before answering the query.
+A triage router determines which data sources should be used before answering a query.
 
 Query Example	Sources Used
 Show Garfield holdings	SQL
@@ -66,7 +66,7 @@ Features:
 
 Each document creates its own vector index
 
-Queries can search across all indexes
+Queries can search across multiple indexes
 
 Results are deduplicated before retrieval
 
@@ -78,7 +78,7 @@ DOCX
 
 4. Cache-Aside Retrieval
 
-To reduce repeated LLM calls, the RAG system uses an in-memory cache.
+To reduce repeated LLM calls, the system uses in-memory caching.
 
 Property	Value
 Cache type	In-memory
@@ -90,14 +90,14 @@ Cache key format:
 MD5(index_name + query)
 5. Clarification Handling
 
-If the system detects ambiguous queries, it requests clarification.
+If the system detects an ambiguous query, it requests clarification.
 
 Example:
 
 User: Show profit
 System: Which portfolio do you mean?
 
-A retry limit prevents infinite loops.
+A retry limit prevents infinite clarification loops.
 
 Installation
 
@@ -120,13 +120,13 @@ Run the application:
 streamlit run app.py
 Streamlit Cloud Deployment
 
-Push the repository to GitHub.
+Push the repository to GitHub
 
-Go to Streamlit Cloud.
+Go to Streamlit Cloud
 
-Create a new application from the repo.
+Create a new app
 
-Add secrets in the deployment settings:
+Add secrets in deployment settings:
 
 GROQ_API_KEY = "your_key"
 TAVILY_API_KEY = "your_key"
@@ -135,12 +135,12 @@ Set the main file to:
 
 app.py
 
-Deploy the application.
+Deploy the application
 
 Usage
 Step 1 — Load datasets
 
-Upload the following datasets:
+Upload the following files:
 
 holdings.csv
 
@@ -150,7 +150,7 @@ Click Load Datasets in the sidebar.
 
 Step 2 — Upload documents (optional)
 
-Upload financial reports or research documents.
+Upload financial research documents.
 
 Supported formats:
 
@@ -159,9 +159,6 @@ PDF
 DOCX
 
 Step 3 — Ask questions
-
-Example queries:
-
 Query	Data Sources
 Total market value for Garfield portfolio	SQL
 Which portfolios hold bonds?	SQL
@@ -198,9 +195,9 @@ Streamlit
 
 SQLite
 
-FAISS-style vector indexing
-
 Sentence Transformers
+
+Vector Search (FAISS-style)
 
 Groq LLM API
 
