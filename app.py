@@ -69,6 +69,10 @@ with st.sidebar:
     st.divider()
 
     st.subheader("Portfolio Datasets")
+    st.caption(
+    "Download the sample dataset from GitHub: "
+    "https://github.com/sutharimanikanta/Finance-Intelligence-assistance-/tree/main"
+)
     col1, col2 = st.columns(2)
     holdings_file = col1.file_uploader("holdings.csv", type=["csv"], key="holdings_upload")
     trades_file = col2.file_uploader("trades.csv", type=["csv"], key="trades_upload")
